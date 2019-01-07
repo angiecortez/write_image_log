@@ -1,0 +1,130 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>write_image_logo</title>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="section_area">
+      <div class="form-group">
+        <label>Description</label>
+        <!-- <textarea name="quotetext" class="form-control">Aqui debes poner tu lema.</textarea> -->
+        <input name="quotetext" type="text" value="" placeholder="Aqui debes poner tu lema." class="form-control" />
+
+      </div>
+
+      <select onchange="changeTipography(this)">
+        <option>Adelle</option>
+        <option>Georgia</option>
+        <option>Palatino Linotype</option>
+        <option>Book Antiqua</option>
+        <option>Times New Roman</option>
+        <option>Arial</option>
+        <option>Helvetica</option>
+        <option>Arial Black</option>
+        <option>Impact</option>
+        <option>Lucida Sans Unicode</option>
+        <option>Tahoma</option>
+        <option>Verdana</option>
+        <option>Courier New</option>
+        <option>Lucida Console</option>
+      </select>
+
+      <select onchange="changeDecoration(this)">
+        <option>none</option>
+        <option>line-through</option>
+        <option>underline</option>
+        <option>overline</option>
+        <option>underline overline</option>
+
+      </select>
+
+      <div class="form-group">
+        <label>Logo Source</label>
+        <input name="quotesource" type="text" value="" placeholder="angie cortez" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Logo</label>
+        <input name="quotelogo" type="file">
+      </div>
+
+      <button id="generatecard" class="btn btn-primary">Generate</button>
+    </div>
+
+    <div class="section_area" id="remove">
+      <div id="htmlcanvas">
+        <div id="sizes" xmlns="http://www.w3.org/1999/xhtml" style="font-size:30px; background-color:#fff;width:550px;height:280px;position:relative;">
+          <p style="text-align:center; text-transform:uppercase; padding-top:120px ;height:200px;margin:0;" id="cardtext"></p>
+        </div>
+      </div>
+      <div id="overlaycanvas">
+        <!-- <img id="person_area" src="https://s-media-cache-ak0.pinimg.com/736x/29/8f/e7/298fe73acc785572c48d1c447ff1ee9a.jpg" /> -->
+        <!-- <img id="logo_area" src="https://68.media.tumblr.com/avatar_5c40a7ffa808_128.png" /> -->
+      </div>
+    </div>
+
+    <div id="finalOutput" class="section_area">
+      <canvas id="canvas" style="border:1px solid black;" width="550" height="280"></canvas>
+      <!-- <canvas id="canvas" style="border:1px solid black;" width="400" height="220"></canvas> -->
+
+    </div>
+
+  </div>
+
+  <div style="display:flex; margin:10px;">
+
+    <!-- THIS IS FOR THE LOGO, FOR MOVING, CHANGE SIZE AND OTHER THINGS -->
+    <label for="width">width</label>
+    <input type="number" id="width" value="50" onChange="onChangeWidth()">
+
+    <label for="paddingTop">paddingTop</label>
+    <input type="number" id="paddingTop" value="120" onChange="onChangePadding()">
+
+    <label for="right">right</label>
+    <input type="number" id="right" value="490" onChange="onChangeRight()">
+
+    <label for="height">height</label>
+    <input type="number" id="height" value="50" onchange="onChangeHeight()">
+
+    <input class="btn" id="decrease" type="button" value="Decrease Font Size 1px" onclick="increaseFontSize(-1)">
+    <input class="btn" id="increase" type="button" value="Increase Font Size 1px" onclick="increaseFontSize(1)">
+    <!-- END -->
+    <div class="">
+      <button id="saveBtn" class="btn">Download</button>
+    </div>
+    <!-- <a id="download" download="resized.png"><input type="button" value="Download Resized Image" onclick="Download()"></a> -->
+
+  </div>
+  <p>Escoge tus colores:</p>
+  <label for="colorWell">Color:</label>
+  <input type="color" value="#ff0000" id="colorWell">
+
+  <script>
+    const changeTipography = (selectTag) => {
+      const listValue = selectTag.options[selectTag.selectedIndex].text;
+      cardtext.style.fontFamily = listValue;
+      generateFinal()
+    }
+    const changeDecoration = (selectTag) => {
+      const decoration = selectTag.options[selectTag.selectedIndex].text;
+      cardtext.style.textDecoration = decoration || 'Adelle';
+      generateFinal()
+    }
+    const onChangePadding = () => {
+      const decoration = paddingTop.value;
+      cardtext.style.paddingTop = decoration;
+      generateFinal()
+    }
+    console.log(canvas.width, canvas.height)
+  </script>
+  <script src="index.js"></script>
+  <script src="data.js"></script>
+</body>
+
+</html>
