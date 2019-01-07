@@ -1,13 +1,13 @@
 const downloadBtn = document.querySelector('#saveBtn');
-const cardtext = document.getElementById('cardtext');
+const cardtext = document.querySelector('#cardtext');
+const cardtext1 = document.querySelector('#cardtext1');
 const quotetypography = document.getElementById('quotetypography');
-const sizes = document.getElementById('sizes');
-console.log(sizes.style.width);
+const sizes = document.querySelector('.sizes');
 const canvas = document.getElementById('canvas');
-// canvas.width = 400;
-// canvas.height = 280;
+const canvas1 = document.getElementById('canvas1');
 console.log('width: ', canvas.width, 'height: ', canvas.height);
 const ctx = canvas.getContext('2d');
+const ctx1 = canvas1.getContext('2d');
 let img = new Image();
 img.crossOrigin = 'anonymous';
 img.setAttribute('crossOrigin', 'anonymous');
@@ -54,18 +54,20 @@ const drawInlineSVG = (ctx, rawSVG, callback) => {
 		domURL.revokeObjectURL(url);
 		callback(img);
 	};
-
 	img.src = url;
 };
 
 const generateFinal = () => {
 	// const finalCardSize = { width: 550, height: 280 };
 	const finalCardSize = { width: sizes.style.width, height: sizes.style.height };
+	const finalCardSize1 = { width: 400, height: 200 };
 	const finalLogoSize = { width: x.value, height: y.value };
 	// overwrite the description
 	cardtext.innerHTML = document.querySelector('input[name=quotetext]').value;
+	cardtext1.innerHTML = document.querySelector('input[name=quotetext]').value;
 
 	const htmlcanvas = document.getElementById('htmlcanvas');
+	const htmlcanvas1 = document.getElementById('htmlcanvas1');
 	const quotelogo = document.querySelector('input[name=quotelogo]');
 
 	const data =
@@ -79,9 +81,21 @@ const generateFinal = () => {
 		'</foreignObject>' +
 		'</svg>';
 
+	const data1 =
+		'<svg xmlns="http://www.w3.org/2000/svg" width="' +
+		finalCardSize1.width +
+		'" height="' +
+		finalCardSize1.height +
+		'">' +
+		'<foreignObject width="100%" height="100%">' +
+		htmlcanvas1.innerHTML +
+		'</foreignObject>' +
+		'</svg>';
+
 	drawInlineSVG(ctx, data, () => {
 		// console.log(canvas.toDataURL('image/jpeg')); // -> PNG data-uri
 	});
+
 	const logoURL = URL;
 	const logourl = logoURL.createObjectURL(quotelogo.files[0]);
 	let logoimg = new Image();
@@ -92,9 +106,27 @@ const generateFinal = () => {
 		finaloc = scaleDownImage(logoimg, finalLogoSize);
 		// finally draw the image
 		ctx.drawImage(finaloc, right.value, 5, finaloc.width, finaloc.height);
+		console.log('finaloc', finaloc, 'finaloc.height', finaloc.height);
 	};
 
-	document.querySelector('#remove').classList.add('remove');
+	drawInlineSVG(ctx1, data1, () => {
+		// console.log(canvas.toDataURL('image/jpeg')); // -> PNG data-uri
+	});
+	const logoURL1 = URL;
+	const logourl1 = logoURL1.createObjectURL(quotelogo.files[0]);
+	let logoimg1 = new Image();
+	logoimg1.crossOrigin = 'anonymous';
+	logoimg1.setAttribute('crossOrigin', 'anonymous');
+	logoimg1.src = logourl1;
+
+	logoimg1.onload = () => {
+		finaloc = scaleDownImage(logoimg1, finalLogoSize);
+		// finally draw the image
+		ctx1.drawImage(finaloc, 340, 0, finaloc.width, finaloc.height);
+		console.log('finaloc', finaloc, 'finaloc.height', finaloc.height);
+	};
+
+	// document.querySelector('#remove').classList.add('remove');
 	document.querySelector('#finalOutput').classList.add('show');
 	// img.src = url;
 };

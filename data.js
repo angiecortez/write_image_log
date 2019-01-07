@@ -30,15 +30,19 @@ const scaleDownImage = (targetImg, destImg) => {
 };
 /** THIS IS FOR INCREASE THE SIZE OF DESCRIPTION */
 const increaseFontSize = (increaseFactor) => {
-	const txt = document.getElementById('cardtext');
+	const txt = cardtext;
+	const txt1 = cardtext1;
 	const style = window.getComputedStyle(txt, null).getPropertyValue('font-size');
+	const style1 = window.getComputedStyle(txt1, null).getPropertyValue('font-size');
 	const currentSize = parseFloat(style);
+	const currentSize1 = parseFloat(style1);
 	txt.style.fontSize = currentSize + increaseFactor + 'px';
+	txt1.style.fontSize = currentSize1 + increaseFactor + 'px';
 };
 /* THIS IS FOR INCREASE THE IMAGE-LOGO */
 
 const increaseFontImage = (increaseFactor) => {
-	const txt = document.getElementById('cardtext');
+	const txt = document.querySelector('#cardtext');
 	const style = window.getComputedStyle(txt, null).getPropertyValue('font-size');
 	const currentSize = parseFloat(style);
 	txt.style.fontSize = currentSize + increaseFactor + 'px';
