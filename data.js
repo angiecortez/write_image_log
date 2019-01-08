@@ -1,6 +1,6 @@
 /** THIS IS FOR MAKINF THE LOGO VERY SHORT AND ADAPTABLE**/
 const scaleDownImage = (targetImg, destImg) => {
-	let reps = Math.floor(Math.log2(targetImg.width / destImg.width));
+	let reps = Math.floor(Math.log2(targetImg.width / destImg.width + 10));
 	// create off-screen canvas to perform scaling down image
 	let prevoc;
 	let finaloc;
@@ -13,19 +13,19 @@ const scaleDownImage = (targetImg, destImg) => {
 			oc.height = targetImg.height * 0.5;
 			octx.drawImage(targetImg, 0, 0, oc.width, oc.height);
 		} else {
-			oc.width = prevoc.width * 0.5;
-			oc.height = prevoc.height * 0.5;
+			oc.width = prevoc.width * 3;
+			oc.height = prevoc.height * 3;
 			octx.drawImage(prevoc, 0, 0, oc.width, oc.height);
 		}
 		i === reps - 1 ? (finaloc = oc) : (prevoc = oc);
 	}
+	console.log('finaloc', finaloc);
 
 	const foc = document.createElement('canvas');
 	const foctx = foc.getContext('2d');
 	foc.width = destImg.width;
 	foc.height = destImg.height;
 	foctx.drawImage(finaloc, 0, 0, foc.width, foc.height);
-
 	return foc;
 };
 /** THIS IS FOR INCREASE THE SIZE OF DESCRIPTION */
@@ -48,15 +48,24 @@ const increaseFontImage = (increaseFactor) => {
 	txt.style.fontSize = currentSize + increaseFactor + 'px';
 };
 
-const download = (data, filename) => {
-	let e;
-	const link = document.createElement('a');
-	link.download = filename;
-	link.href = data.toDataURL('image/jpeg', 1);
+// const download = (data, filename) => {
+// 	let e;
+// 	const link = document.createElement('a');
+// 	link.download = filename;
+// 	link.href = data.toDataURL('image/jpeg', 1);
 
-	e = new MouseEvent('click');
-	link.dispatchEvent(e);
-	console.log(link);
+// 	e = new MouseEvent('click');
+// 	link.dispatchEvent(e);
+// 	console.log(link);
+// };
+const download = (canvas) => {
+	var link = document.createElement('a');
+	link.href = canvas.toDataURL('image/jpeg');
+	link.download = 'picture.png';
+	link.style.display = 'none';
+	document.body.appendChild(link);
+	link.click();
+	link.parentNode.removeChild(link);
 };
 const updateFirst = (e) => {
 	const p = document.querySelector('p');

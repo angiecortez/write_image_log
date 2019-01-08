@@ -52,7 +52,7 @@
 
       <button id="generatecard" class="btn btn-primary">Generate</button>
     </div>
-    <!-- NOMRAL SIZE -->
+<!-- NOMRAL SIZE -->
     <div class="section_area" style="display:none;">
       <div id="htmlcanvas">
         <div class="sizes" xmlns="http://www.w3.org/1999/xhtml" style="font-size:30px; background-color:#fff;width:550px;height:280px;position:relative;">
@@ -68,10 +68,33 @@
         </div>
       </div>
     </div>
+    <div class="section_area" style="display:none;">
+      <div id="htmlcanvas2">
+        <div class="sizes" xmlns="http://www.w3.org/1999/xhtml" style="font-size:30px; background-color:#fff;width:820px;height:312px;position:relative;">
+          <p style="text-align:center; text-transform:uppercase; padding-top:150px; height:200px;margin:0;" id="cardtext2">hola</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section_area" style="display:none;">
+      <div id="htmlcanvas3">
+        <div class="sizes" xmlns="http://www.w3.org/1999/xhtml" style="font-size:90px; background-color:#fff;width:1200px;height:1200px;position:relative;">
+          <p style="text-align:center; text-transform:uppercase; padding-top:500px; height:200px;margin:0;" id="cardtext3">hola</p>
+        </div>
+      </div>
+    </div>
 
     <div id="finalOutput" class="section_area">
+            <h1>550X280</h1>
+
       <canvas id="canvas" style="border:1px solid black;" width="550" height="280"></canvas>
+            <h1>400X200</h1>
+
       <canvas id="canvas1" style="margin-top:10px; border:1.5px solid black;" width="400" height="200"></canvas>
+      <h1>820X312</h1>
+      <canvas id="canvas2" style="margin-top:10px; border:1.5px solid black;" width="820" height="312"></canvas>
+      <h1>1200x1200 instagram</h1>
+      <canvas id="canvas3" style="margin-top:10px; border:1.5px solid black;" width="1200" height="1200"></canvas>
 
     </div>
 
@@ -81,13 +104,13 @@
 
     <!-- THIS IS FOR THE LOGO, FOR MOVING, CHANGE SIZE AND OTHER THINGS -->
     <label for="width">width</label>
-    <input type="number" id="width" value="50" onChange="onChangeWidth()">
+    <input type="number" id="width" value="60" onChange="onChangeWidth()">
 
     <label for="paddingTop">paddingTop</label>
     <input type="number" id="paddingTop" value="120" onChange="onChangePadding()">
 
     <label for="right">right</label>
-    <input type="number" id="right" value="490" onChange="onChangeRight()">
+    <input type="number" id="right" value="470" onChange="onChangeRight()">
 
     <label for="height">height</label>
     <input type="number" id="height" value="50" onchange="onChangeHeight()">
@@ -108,20 +131,22 @@
   <script>
     const changeTipography = (selectTag) => {
       const listValue = selectTag.options[selectTag.selectedIndex].text;
-      cardtext.style.fontFamily = listValue;
-      cardtext1.style.fontFamily = listValue;
+      cardtext.style.fontFamily = listValue || 'Adelle';
+      cardtext1.style.fontFamily = listValue || 'Adelle';
       generateFinal()
     }
     const changeDecoration = (selectTag) => {
       const decoration = selectTag.options[selectTag.selectedIndex].text;
-      cardtext.style.textDecoration = decoration || 'Adelle';
-      cardtext1.style.textDecoration = decoration || 'Adelle';
+      cardtext.style.textDecoration = decoration;
+      cardtext1.style.textDecoration = decoration;
+      cardtext2.style.textDecoration = decoration;
+      cardtext3.style.textDecoration = decoration;
       generateFinal()
     }
     const onChangePadding = () => {
       const decoration = paddingTop.value;
-      cardtext.style.paddingTop = decoration;
-      cardtext1.style.paddingTop = decoration;
+      p.style.paddingTop = decoration;
+      p.style.paddingTop = decoration;
       generateFinal()
     }
   </script>

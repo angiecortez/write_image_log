@@ -39,6 +39,9 @@
 #htmlcanvas > div {
 	border: 2px solid #000;
 }
+#htmlcanvas1 > div {
+	border: 2px solid #000;
+}
 .section_area {
 	padding: 20px;
 	position: relative;
